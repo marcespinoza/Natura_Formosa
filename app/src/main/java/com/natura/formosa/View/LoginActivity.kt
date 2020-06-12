@@ -42,6 +42,10 @@ class LoginActivity : AppCompatActivity() {
         googlebutton.setOnClickListener{
             signIn()
         }
+        val currentUser = auth.currentUser
+        if(currentUser != null){
+            startActivity()
+        }
     }
 
     @OnClick(R.id.googlebutton)
@@ -80,10 +84,16 @@ class LoginActivity : AppCompatActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
                     Toast.makeText(this, user?.displayName, Toast.LENGTH_SHORT).show()
-                } else {
+                  } else {
                 }
 
             }
+    }
+
+    private fun startActivity(){
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
 }
