@@ -2,6 +2,7 @@ package com.natura.formosa.View
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.natura.formosa.R
 
@@ -44,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         }
         val currentUser = auth.currentUser
         if(currentUser != null){
-            startActivity()
+            startActivity(currentUser)
         }
     }
 
@@ -69,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
                 val account = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account!!)
             } catch (e: ApiException) {
+                Log.i("ERROR",""+e.message)
                 // Google Sign In failed, update UI appropriately
                 // ...
             }
@@ -83,15 +86,17 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     val user = auth.currentUser
-                    Toast.makeText(this, user?.displayName, Toast.LENGTH_SHORT).show()
+                    startActivity(user)
                   } else {
                 }
 
             }
     }
 
-    private fun startActivity(){
+    private fun startActivity(user: FirebaseUser?){
         val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("username",user?.displayName)
+        intent.putExtra("photourl",user?.photoUrl)
         startActivity(intent)
         finish()
     }

@@ -1,7 +1,10 @@
 package com.natura.formosa.View
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
+import android.view.View
+import android.widget.TextView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -25,9 +28,14 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-
+        val intent = intent
+        val name = intent.getStringExtra("username")
+        val photourl = intent.getStringExtra("photourl")
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
+        val mHeaderView = navView.getHeaderView(0)
+        val userNameTxt = mHeaderView.findViewById(R.id.username) as TextView
+        userNameTxt.setText(name)
         val navController = findNavController(R.id.nav_host_fragment)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
