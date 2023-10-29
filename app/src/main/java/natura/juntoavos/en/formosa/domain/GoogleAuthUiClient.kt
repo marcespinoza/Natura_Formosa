@@ -83,6 +83,7 @@ class GoogleAuthUiClient(
                 BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
                     .setSupported(true)
                     .setFilterByAuthorizedAccounts(false)
+                    .setServerClientId(context.getString(R.string.web_client_id))
                     .build()
             )
             .setAutoSelectEnabled(true)

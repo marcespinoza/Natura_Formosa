@@ -1,17 +1,18 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
     id 'com.google.gms.google-services'
 }
 
 android {
     namespace 'natura.juntoavos.en.formosa'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "natura.juntoavos.en.formosa"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -38,7 +39,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.1.1'
+        kotlinCompilerExtensionVersion '1.4.3'
     }
     packagingOptions {
         resources {
@@ -54,7 +55,7 @@ dependencies {
     implementation 'androidx.activity:activity-compose:1.3.1'
     implementation "androidx.compose.ui:ui:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
-    implementation 'androidx.compose.material:material:1.5.4'
+    implementation 'androidx.compose.material:material:1.2.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -70,4 +71,6 @@ dependencies {
     implementation "androidx.navigation:navigation-compose:2.5.3"
     implementation "io.coil-kt:coil-compose:2.2.2"
 
+    debugImplementation "androidx.compose.ui:ui-tooling:1.2.1"
+    implementation "androidx.compose.ui:ui-tooling-preview:1.2.1"
 }
