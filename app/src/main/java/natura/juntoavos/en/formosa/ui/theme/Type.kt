@@ -2,9 +2,11 @@ package natura.juntoavos.en.formosa.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import natura.juntoavos.en.formosa.R
 
 
 // Set of Material typography styles to start with
@@ -26,4 +28,8 @@ val Typography = Typography(
         fontSize = 12.sp
     )
     */
+)
+
+val PacificoFont = FontFamily(
+    Font(R.font.pacifico_regular)
 )

@@ -20,6 +20,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.auth.api.identity.Identity
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.ktx.messaging
 import kotlinx.coroutines.launch
 import natura.juntoavos.en.formosa.domain.GoogleAuthUiClient
 import natura.juntoavos.en.formosa.domain.ProfileScreen
@@ -38,8 +40,11 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        registerFCM()
         setContent {
-            Natura_FormosaTheme {
+            Natura_FormosaTheme (
+                darkTheme = false
+            ) {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -117,6 +122,17 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun registerFCM() {
+        Firebase.messaging.token.addOnCompleteListener(){
+            if (!it.isSuccessful){
+                println("Token not generated")
+                return@addOnCompleteListener
+            }
+            val token = it.result
+            print("FCM token $token")
         }
     }
 }
